@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "UrbanDiction",
   "version": "",
   "description": "",
   "author": "",
@@ -10,7 +10,7 @@
   "scripts": {
     "build:dev": "webpack -d --watch",
     "test": "jest",
-    "start:dev": "nodemon ./server/server.js",
+    "start:dev": "nodemon ./server/server.js development",
     "start": "node ./server/server.js"
   },
   "dependencies": {
