@@ -1,5 +1,5 @@
 const api = require("../controllers/getApi.js");
 
-module.exports = function(app) {
+module.exports = app => {
   app.get("/api", api.getApi);
 };

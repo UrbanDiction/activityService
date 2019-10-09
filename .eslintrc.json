@@ -4,7 +4,16 @@
  * Visit this repo for more information:
  *   https://github.com/reactorcore/eslint-config-hackreactor
  */
-
 {
-    "extends": ["airbnb-base", "plugin:prettier/recommended"]
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "plugins": ["babel", "react", "jest"],
+  "extends": ["airbnb-base", "plugin:prettier/recommended", "jest-enzyme"],
+  "overrides": [
+    { "files": ["**/*.jsx/*.js"], "rules": { "no-unused-vars": "warn" } }
+  ]
 }
