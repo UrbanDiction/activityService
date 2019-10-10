@@ -27,7 +27,6 @@ jobs:
             - v1-dependencies-
 
       - run: npm install
-      - run: npm install -g eslint
 
       - save_cache:
           paths:
@@ -36,4 +35,4 @@ jobs:
 
       # run tests!
       - run: npm test
-      - run: eslint "**/*.js" --ignore-pattern node_modules/
+      - run: npx eslint "**/*.js" --ignore-pattern node_modules/
