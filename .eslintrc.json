@@ -13,7 +13,5 @@
   },
   "plugins": ["babel", "react", "jest"],
   "extends": ["airbnb-base", "plugin:prettier/recommended", "jest-enzyme"],
-  "overrides": [
-    { "files": ["**/*.jsx/*.js"], "rules": { "no-unused-vars": "warn" } }
-  ]
+  "rules": { "no-unused-vars": "warn" }
 }
