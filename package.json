@@ -11,7 +11,8 @@
     "react:dev": "webpack -d --watch",
     "test": "jest",
     "server:dev": "nodemon ./server/server.js development",
-    "start": "node ./server/server.js"
+    "start": "node ./server/server.js",
+    "create:db": "mysql -u root -p < ./server/db/schema.sql"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
