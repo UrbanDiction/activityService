@@ -12,11 +12,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: urbandiction
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-          MYSQL_HOST: localhost
-          MYSQL_ROOT_HOST: localhost
-          LOCAL_SOCKET_ADDRESS: localhost
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -27,6 +22,23 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u root -proot test_db < seed_data.sql
 
       # Download and cache dependencies
       - restore_cache:
@@ -41,11 +53,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run: sudo apt-get update
-      - run: sudo apt-get install mysql-client
+      # - run: sudo apt-get update
+      # - run: sudo apt-get install mysql-client
       # - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
-      - run: mysql -hlocalhost -uroot -proot < seed_data.sql
+      # - run: mysql -hlocalhost -uroot -proot < seed_data.sql
       # - run: sudo apt-get install default-mysql-client
       # start the server in the background
       # - run: mysql -u root -proot < ./server/db/seed_data.sql
