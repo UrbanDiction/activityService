@@ -41,7 +41,8 @@ jobs:
 
       - run: sudo apt-get update
       - run: sudo apt-get install mysql-server
-      - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
+      - run: mysql.server start
+      # - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
       # - run: sudo apt-get install default-mysql-client
       # start the server in the background
       - run: mysql -u root -proot < ./server/db/seed_data.sql
