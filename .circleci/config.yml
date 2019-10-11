@@ -14,7 +14,9 @@ jobs:
           MYSQL_DATABASE: urbandiction
           MYSQL_USER: root
           MYSQL_PASSWORD: root
-          MYSQL_HOST: 127.0.0.1
+          MYSQL_HOST: localhost
+          MYSQL_ROOT_HOST: localhost
+          LOCAL_SOCKET_ADDRESS: localhost
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -25,7 +27,6 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y libsqlite3-dev zlib1g-dev
 
       # Download and cache dependencies
       - restore_cache:
@@ -43,7 +44,6 @@ jobs:
 
       - run: sudo apt-get update
       - run: sudo apt-get install mysql-client
-      - run: ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
       # - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
       - run: mysql -hlocalhost -uroot -proot < seed_data.sql
       # - run: sudo apt-get install default-mysql-client
