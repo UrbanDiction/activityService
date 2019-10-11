@@ -43,7 +43,6 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install mysql-client
       - run: ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
-      - run: sudo service mysql restart
       # - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
       - run: mysql -hlocalhost -uroot -proot < seed_data.sql
       # - run: sudo apt-get install default-mysql-client
