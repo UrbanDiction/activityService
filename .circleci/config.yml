@@ -9,7 +9,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:12.6.0
       - image: circleci/mysql:8.0.17
-          environment:
+        environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: urbandiction
           MYSQL_USER: root
