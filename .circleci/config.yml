@@ -56,11 +56,14 @@ jobs:
       - run:
           name: Create non-admin user
           command: |
-            sudo mysql -u root -e "CREATE user student IDENTIFIED BY 'student';"
+            # sudo mysql -u root -e "CREATE user student IDENTIFIED BY 'student';"
+            sudo mysql -u root -e "USE mysql;UPDATE user SET plugin='mysql_native_password' WHERE User='root';FLUSH PRIVILEGES;"
+            sudo service mysql restart
       - run:
           name: Install MySQL CLI; Import dummy data; run an example query
           command: |
-            sudo mysql -h127.0.0.1 -ustudent -pstudent urbandiction < seed_data.sql
+            # sudo mysql -h127.0.0.1 -ustudent -pstudent urbandiction < seed_data.sql
+            sudo mysql -h127.0.0.1 -uroot -proot urbandiction < seed_data.sql
 
       # Download and cache dependencies
       - restore_cache:
