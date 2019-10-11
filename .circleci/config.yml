@@ -34,6 +34,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: node ./server/server.js
+      - run:
+          command: node ./server/server.js
+          background: true
       - run: npm test
       - run: npx eslint "**/*.js" --ignore-pattern node_modules/
