@@ -8,11 +8,11 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.6.0
-        environment:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: urbandiction
-          MYSQL_USER: student
-          MYSQL_PASSWORD: student
+        # environment:
+        #   MYSQL_ROOT_PASSWORD: root
+        #   MYSQL_DATABASE: urbandiction
+        #   MYSQL_USER: student
+        #   MYSQL_PASSWORD: student
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -64,7 +64,7 @@ jobs:
           command: |
             sudo mysql -u root -e "create database urbandiction"
             # sudo mysql -h 127.0.0.1 -u student -pstudent urbandiction < seed_data.sql
-            sudo mysql -h 127.0.0.1 -u root urbandiction < seed_data.sql
+            sudo mysql -h 127.0.0.1 -u root urbandiction < ./server/db/seed_data.sql
             # sudo mysql -u root < seed_data.sql
 
       # Download and cache dependencies
