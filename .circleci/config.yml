@@ -11,6 +11,8 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: urbandiction
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
