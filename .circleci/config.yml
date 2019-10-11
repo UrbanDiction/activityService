@@ -8,6 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.6.0
+      - image: circleci/mysql:latest
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: urbandiction
