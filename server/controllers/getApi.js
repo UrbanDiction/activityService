@@ -1,5 +1,9 @@
+const { getBaseResponse } = require("../models/getAllData.js");
+
 module.exports = {
   getApi(req, res) {
-    res.status(200).send();
+    getBaseResponse((err, results) => {
+      res.status(200).json(results);
+    });
   }
 };

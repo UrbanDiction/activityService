@@ -8,6 +8,12 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.6.0
+      - image: circleci/mysql:8.0.17
+          environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: urbandiction
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -34,6 +40,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # start the server in the background
+      - run: mysql -u root -proot < ./server/db/seed_data.sql
       - run:
           command: node ./server/server.js
           background: true

@@ -1,6 +1,6 @@
 const faker = require("faker");
 
-const mysql = require("./db/connection.js");
+const mysql = require("./connection.js");
 
 for (let i = 0; i < 100; i += 1) {
   const loremWord = faker.fake("{{lorem.word}}");
