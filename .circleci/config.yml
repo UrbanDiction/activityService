@@ -40,9 +40,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-        command: |
-          sudo apt-get install default-mysql-client
-          mysql -u root -proot < ./server/db/seed_data.sql
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -u root -proot < ./server/db/seed_data.sql
       # start the server in the background
       - run:
           command: node ./server/server.js
