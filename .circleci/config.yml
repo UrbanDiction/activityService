@@ -14,6 +14,7 @@ jobs:
           MYSQL_DATABASE: urbandiction
           MYSQL_USER: root
           MYSQL_PASSWORD: root
+          MYSQL_HOST: 127.0.0.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -42,10 +43,10 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install mysql-client
       # - run: mysql -h 127.0.0.1 -P 3306 -u root -proot urbandiction
-      - run: mysql -h 127.0.0.1 -u root -proot < ./server/db/seed_data.sql
+      # - run: mysql -h 127.0.0.1 -u root -proot < ./server/db/seed_data.sql
       # - run: sudo apt-get install default-mysql-client
       # start the server in the background
-      # - run: mysql -u root -proot < ./server/db/seed_data.sql
+      - run: mysql -u root -proot < ./server/db/seed_data.sql
       - run:
           command: node ./server/server.js
           background: true
