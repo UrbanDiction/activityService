@@ -19,6 +19,12 @@
 -- Table structure for table `definitions`
 --
 
+DROP DATABASE IF EXISTS urbandiction;
+
+CREATE DATABASE urbandiction;
+
+USE urbandiction;
+
 DROP TABLE IF EXISTS `definitions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -93,7 +99,7 @@ CREATE TABLE `words` (
 
 LOCK TABLES `words` WRITE;
 /*!40000 ALTER TABLE `words` DISABLE KEYS */;
-INSERT INTO `words` VALUES (1,'soluta'),(2,'consequuntur'),(3,'ad'),(4,'vel'),(5,'ea'),(6,'earum'),(7,'eius'),(8,'omnis'),(9,'ratione'),(10,'dignissimos'),(11,'sunt'),(12,'magni'),(13,'eos'),(14,'soluta'),(15,'fugit'),(16,'cumque'),(17,'deleniti'),(18,'accusantium'),(19,'ut'),(20,'inventore'),(21,'ut'),(22,'blanditiis'),(23,'voluptatum'),(24,'quaerat'),(25,'officiis'),(26,'sit'),(27,'porro'),(28,'molestiae'),(29,'aut'),(30,'voluptate'),(31,'ut'),(32,'sint'),(33,'omnis'),(34,'voluptas'),(35,'rerum'),(36,'eius'),(37,'esse'),(38,'distinctio'),(39,'alias'),(40,'autem'),(41,'esse'),(42,'unde'),(43,'qui'),(44,'sint'),(45,'minus'),(46,'inventore'),(47,'sed'),(48,'dolores'),(49,'quia'),(50,'quaerat'),(51,'alias'),(52,'exercitationem'),(53,'modi'),(54,'nisi'),(55,'et'),(56,'totam'),(57,'quia'),(58,'et'),(59,'eligendi'),(60,'autem'),(61,'maxime'),(62,'nisi'),(63,'quis'),(64,'laboriosam'),(65,'temporibus'),(66,'sed'),(67,'dicta'),(68,'ab'),(69,'facilis'),(70,'corporis'),(71,'rerum'),(72,'id'),(73,'autem'),(74,'minus'),(75,'commodi'),(76,'reiciendis'),(77,'et'),(78,'numquam'),(79,'iste'),(80,'repellendus'),(81,'eos'),(82,'veritatis'),(83,'consequatur'),(84,'et'),(85,'praesentium'),(86,'beatae'),(87,'enim'),(88,'eos'),(89,'sapiente'),(90,'et'),(91,'aut'),(92,'saepe'),(93,'porro'),(94,'possimus'),(95,'iure'),(96,'debitis'),(97,'dolor'),(98,'animi'),(99,'iste'),(100,'et');
+INSERT INTO `words` VALUES (1,'soluta'),(2,'consequuntur'),(3,'ad'),(4,'vel'),(5,'ea'),(6,'earum'),(7,'diuso'),(8,'omnok'),(9,'ratione'),(10,'dignissimos'),(11,'sunt'),(12,'magni'),(13,'egoose'),(14,'soludi'),(15,'fugit'),(16,'cumque'),(17,'deleniti'),(18,'accusantium'),(19,'jut'),(20,'inventore'),(21,'ut'),(22,'blanditiis'),(23,'voluptatum'),(24,'quaerat'),(25,'officiis'),(26,'sit'),(27,'povo'),(28,'molestiae'),(29,'aut'),(30,'voluptate'),(31,'etsa'),(32,'nintae'),(33,'omnis'),(34,'voluptas'),(35,'berumda'),(36,'eius'),(37,'esse'),(38,'distinctio'),(39,'gias'),(40,'qutem'),(41,'blesse'),(42,'unde'),(43,'qui'),(44,'sint'),(45,'limus'),(46,'tore'),(47,'sed'),(48,'dolores'),(49,'luia'),(50,'vaerat'),(51,'alias'),(52,'exercitationem'),(53,'modi'),(54,'yisi'),(55,'ket'),(56,'totam'),(57,'quia'),(58,'et'),(59,'eligendi'),(60,'autem'),(61,'maxime'),(62,'nisi'),(63,'quis'),(64,'laboriosam'),(65,'temporibus'),(66,'sedel'),(67,'dicta'),(68,'ab'),(69,'facilis'),(70,'corporis'),(71,'rerum'),(72,'id'),(73,'cuteni'),(74,'minus'),(75,'commodi'),(76,'reiciendis'),(77,'ret'),(78,'numquam'),(79,'iste'),(80,'repellendus'),(81,'fosba'),(82,'veritatis'),(83,'consequatur'),(84,'zet'),(85,'praesentium'),(86,'beatae'),(87,'enim'),(88,'kos'),(89,'sapiente'),(90,'etal'),(91,'eot'),(92,'saepe'),(93,'porro'),(94,'possimus'),(95,'iure'),(96,'debitis'),(97,'dolor'),(98,'animi'),(99,'miste'),(100,'feto');
 /*!40000 ALTER TABLE `words` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
