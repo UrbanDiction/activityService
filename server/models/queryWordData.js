@@ -8,7 +8,7 @@ const queryWordData = ({ word }, callback) => {
         callback(error1, null);
       } else {
         connection.query(
-          `SELECT definition FROM definitions WHERE word_id = ${wordQuery[0].id}`,
+          `SELECT * FROM definitions WHERE word_id = ${wordQuery[0].id}`,
           (error2, definitionQuery) => {
             if (error2) {
               callback(error2, null);

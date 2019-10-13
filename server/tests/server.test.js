@@ -24,7 +24,7 @@ describe("Server tests", () => {
                                 `INSERT INTO words(word) VALUES ('test')`,
                                 () => {
                                   connection.query(
-                                    `INSERT INTO definitions(definition, word_id) VALUES ('test def', 1)`,
+                                    `INSERT INTO definitions(definition, created_date, created_by, upvotes, downvotes, word_id) VALUES ('test def', "2017-08-02", "Nick", 1, 1, 1)`,
                                     () => {
                                       connection.query(
                                         `INSERT INTO visits(date, word_id) VALUES('test date', 1)`,
@@ -53,7 +53,7 @@ describe("Server tests", () => {
   //   connection.end();
   // });
 
-  it("should respond to a POST request to /activity/word", done => {
+  it("should respond to a get request to /activity/word", done => {
     request
       .get("/activity/word")
       .send({ word: "test" })
@@ -62,7 +62,13 @@ describe("Server tests", () => {
       .expect({
         definitionQuery: [
           {
-            definition: "test def"
+            id: 1,
+            definition: "test def",
+            created_date: "2017-08-02",
+            created_by: "Nick",
+            upvotes: 1,
+            downvotes: 1,
+            word_id: 1
           }
         ],
         visitsQuery: [
