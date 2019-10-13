@@ -1,44 +1,80 @@
 const request = require("supertest")("http://localhost:8000");
+const connection = require("../db/connection.js");
 
-it("should respond to a POST request to /activity/word", done => {
-  request
-    .get("/activity/word")
-    .send({ word: "soluta" })
-    .set("Accept", "application/json")
-    .expect("Content-Type", /json/)
-    .expect({
-      definitionQuery: [
-        {
-          definition:
-            "illum nihil molestiae dignissimos saepe praesentium dolore omnis velit labore dolorem ut iure ut et est laboriosam non molestiae eos"
-        },
-        {
-          definition:
-            "rem qui id amet sed atque inventore molestiae aut laborum veniam illo voluptate aut quis ea fugit qui tenetur voluptates"
-        },
-        {
-          definition:
-            "recusandae iure suscipit aliquid libero quos quasi ipsum vitae at quaerat qui assumenda voluptas voluptatem id consequatur et in ad"
+describe("Server tests", () => {
+  beforeEach(done => {
+    connection.query(`ALTER TABLE vists DROP FOREIGN KEY visits_ibfk_1`, () => {
+      connection.query(
+        `ALTER TABLE definitions DROP FOREIGN KEY definitions_ibfk_1`,
+        () => {
+          connection.query(`ALTER TABLE visits DROP word_id`, () => {
+            connection.query(`ALTER TABLE definitions DROP word_id`, () => {
+              connection.query(`TRUNCATE visits`, () => {
+                connection.query(`TRUNCATE definitions`, () => {
+                  connection.query(`TRUNCATE words`, () => {
+                    connection.query(
+                      `ALTER TABLE visits ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
+                      () => {
+                        connection.query(
+                          `ALTER TABLE definitions ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
+                          () => {
+                            connection.query(
+                              `INSERT INTO visits(date, word_id) VALUES ('test date', 1)`,
+                              () => {
+                                connection.query(
+                                  `INSERT INTO definitions(definition, word_id) VALUES ('test def', 1)`,
+                                  () => {
+                                    connection.query(
+                                      `INSERT INTO words (word) VALUES('test')`,
+                                      done
+                                    );
+                                  }
+                                );
+                              }
+                            );
+                          }
+                        );
+                      }
+                    );
+                  });
+                });
+              });
+            });
+          });
         }
-      ],
-      visitsQuery: [
-        {
-          date: "Sun Jun 23 2019 17:52:44 GMT-0700 (Mountain Standard Time)"
-        },
-        {
-          date: "Thu Aug 08 2019 13:50:13 GMT-0700 (Mountain Standard Time)"
-        },
-        {
-          date: "Sat Dec 01 2018 20:31:30 GMT-0700 (Mountain Standard Time)"
-        }
-      ]
-    })
-    .expect(200)
-    // eslint-disable-next-line consistent-return
-    .end(err => {
-      if (err) {
-        return done(err);
-      }
-      done();
+      );
     });
+  });
+
+  // afterEach(() => {
+  //   connection.end();
+  // });
+
+  it("should respond to a POST request to /activity/word", done => {
+    request
+      .get("/activity/word")
+      .send({ word: "test" })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect({
+        definitionQuery: [
+          {
+            definition: "test def"
+          }
+        ],
+        visitsQuery: [
+          {
+            date: "test date"
+          }
+        ]
+      })
+      .expect(200)
+      // eslint-disable-next-line consistent-return
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+  });
 });
