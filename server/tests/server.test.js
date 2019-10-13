@@ -90,12 +90,13 @@ describe("Server tests", () => {
           return done(err);
         }
         connection.query(
-          `SELECT date FROM vists WHERE word_id = 1`,
+          `SELECT date FROM visits WHERE word_id = 1`,
           (error, visits) => {
             if (error) {
               return done(err);
             }
             expect(visits.length).toEqual(2);
+            done();
           }
         );
       });
