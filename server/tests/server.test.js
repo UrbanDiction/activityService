@@ -3,47 +3,50 @@ const connection = require("../db/connection.js");
 
 describe("Server tests", () => {
   beforeEach(done => {
-    connection.query(`ALTER TABLE vists DROP FOREIGN KEY visits_ibfk_1`, () => {
-      connection.query(
-        `ALTER TABLE definitions DROP FOREIGN KEY definitions_ibfk_1`,
-        () => {
-          connection.query(`ALTER TABLE visits DROP word_id`, () => {
-            connection.query(`ALTER TABLE definitions DROP word_id`, () => {
-              connection.query(`TRUNCATE visits`, () => {
-                connection.query(`TRUNCATE definitions`, () => {
-                  connection.query(`TRUNCATE words`, () => {
-                    connection.query(
-                      `ALTER TABLE visits ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
-                      () => {
-                        connection.query(
-                          `ALTER TABLE definitions ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
-                          () => {
-                            connection.query(
-                              `INSERT INTO visits(date, word_id) VALUES ('test date', 1)`,
-                              () => {
-                                connection.query(
-                                  `INSERT INTO definitions(definition, word_id) VALUES ('test def', 1)`,
-                                  () => {
-                                    connection.query(
-                                      `INSERT INTO words (word) VALUES('test')`,
-                                      done
-                                    );
-                                  }
-                                );
-                              }
-                            );
-                          }
-                        );
-                      }
-                    );
+    connection.query(
+      `ALTER TABLE visits DROP FOREIGN KEY visits_ibfk_1`,
+      () => {
+        connection.query(
+          `ALTER TABLE definitions DROP FOREIGN KEY definitions_ibfk_1`,
+          () => {
+            connection.query(`ALTER TABLE visits DROP word_id`, () => {
+              connection.query(`ALTER TABLE definitions DROP word_id`, () => {
+                connection.query(`TRUNCATE visits`, () => {
+                  connection.query(`TRUNCATE definitions`, () => {
+                    connection.query(`TRUNCATE words`, () => {
+                      connection.query(
+                        `ALTER TABLE visits ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
+                        () => {
+                          connection.query(
+                            `ALTER TABLE definitions ADD word_id INTEGER, ADD CONSTRAINT FOREIGN KEY(word_id) REFERENCES words(id)`,
+                            () => {
+                              connection.query(
+                                `INSERT INTO words(word) VALUES ('test')`,
+                                () => {
+                                  connection.query(
+                                    `INSERT INTO definitions(definition, word_id) VALUES ('test def', 1)`,
+                                    () => {
+                                      connection.query(
+                                        `INSERT INTO visits(date, word_id) VALUES('test date', 1)`,
+                                        done
+                                      );
+                                    }
+                                  );
+                                }
+                              );
+                            }
+                          );
+                        }
+                      );
+                    });
                   });
                 });
               });
             });
-          });
-        }
-      );
-    });
+          }
+        );
+      }
+    );
   });
 
   // afterEach(() => {
@@ -75,6 +78,26 @@ describe("Server tests", () => {
           return done(err);
         }
         done();
+      });
+  });
+
+  it("should add a visit when post to /activity/view", done => {
+    request
+      .post("/activity/word")
+      .send({ word: "test" })
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        connection.query(
+          `SELECT date FROM vists WHERE word_id = 1`,
+          (error, visits) => {
+            if (error) {
+              return done(err);
+            }
+            expect(visits.length).toEqual(2);
+          }
+        );
       });
   });
 });
