@@ -2,7 +2,7 @@ const request = require("supertest")("http://localhost:8000");
 
 it("should respond to a POST request to /activity/word", done => {
   request
-    .post("/activity/word")
+    .get("/activity/word")
     .send({ word: "soluta" })
     .set("Accept", "application/json")
     .expect("Content-Type", /json/)

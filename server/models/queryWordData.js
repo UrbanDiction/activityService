@@ -1,6 +1,6 @@
 const connection = require("../db/connection.js");
 
-const getBaseResponse = ({ word }, callback) => {
+const queryWordData = ({ word }, callback) => {
   connection.query(
     `SELECT id FROM words where word = ${connection.escape(word)}`,
     (error1, wordQuery) => {
@@ -30,5 +30,5 @@ const getBaseResponse = ({ word }, callback) => {
 };
 
 module.exports = {
-  getBaseResponse
+  queryWordData
 };

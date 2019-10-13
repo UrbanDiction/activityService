@@ -1,5 +1,9 @@
-const api = require("../controllers/getApi.js");
+const {
+  postWordData,
+  postIncrementVisitsToWord
+} = require("../controllers/activity.js");
 
 module.exports = app => {
-  app.post("/activity/word", api.getApi);
+  app.get("/activity/word", postWordData);
+  app.post("/activity/word", postIncrementVisitsToWord);
 };
