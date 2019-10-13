@@ -19,13 +19,16 @@ for (let i = 0; i < 100; i += 1) {
         const definition = faker.fake(
           "{{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}}"
         );
+        const visitsNum = Math.floor(Math.random() * 25);
         mysql.connection.query(
           `INSERT INTO definitions (definition, created_date, created_by, upVotes, downVotes, word_id) VALUES ('${definition}', '${pastDate}', '${name}', ${upVotes}, ${downVotes}, ${wordId})`,
           () => {
-            const pastDate2 = faker.date.recent(365);
-            mysql.connection.query(
-              `INSERT INTO visits (date, word_id) VALUES ('${pastDate2}', ${wordId})`
-            );
+            for (let x = 0; x < visitsNum; x += 1) {
+              const pastDate2 = faker.date.recent(365);
+              mysql.connection.query(
+                `INSERT INTO visits (date, word_id) VALUES ('${pastDate2}', ${wordId})`
+              );
+            }
           }
         );
       }
