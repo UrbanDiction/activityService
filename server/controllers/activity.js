@@ -8,16 +8,18 @@ module.exports = {
     queryGetVisitsForWord(req.body, (error, visits) => {
       if (error) {
         res.status(500).send(error);
+      } else {
+        res.json(visits);
       }
-      res.json(visits);
     });
   },
   postIncrementVisitsToWord(req, res) {
     queryIncrementVisitsToWord(req.body, error => {
       if (error) {
         res.status(500).send(error);
+      } else {
+        res.end();
       }
-      res.end();
     });
   }
 };

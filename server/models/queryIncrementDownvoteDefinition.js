@@ -7,7 +7,7 @@ const queryIncrementDownvoteDefinition = ({ definitionId }, callback) => {
     )}`,
     error1 => {
       if (error1) {
-        callback(error1, null);
+        return callback(error1, null);
       }
       connection.query(
         `SELECT downvotes FROM definitions WHERE id = ${connection.escape(
@@ -15,9 +15,9 @@ const queryIncrementDownvoteDefinition = ({ definitionId }, callback) => {
         )}`,
         (error2, downvoteQuery) => {
           if (error2) {
-            callback(error2, null);
+            return callback(error2, null);
           }
-          callback(null, downvoteQuery);
+          return callback(null, downvoteQuery);
         }
       );
     }
