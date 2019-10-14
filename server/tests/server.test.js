@@ -87,6 +87,27 @@ describe("Server tests", () => {
       });
   });
 
+  it("should increment downvotes when put to /definition/downvote", done => {
+    request
+      .put("/definition/downvote")
+      .send({ definitionId: 1 })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect({
+        downvoteData: [
+          {
+            downvotes: 2
+          }
+        ]
+      })
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        return done();
+      });
+  });
+
   it("should respond with visits data to word when get to /activity/word", done => {
     request
       .get("/activity/word")
@@ -106,12 +127,14 @@ describe("Server tests", () => {
     request
       .post("/activity/word")
       .send({ word: "test" })
+      // eslint-disable-next-line consistent-return
       .end(err => {
         if (err) {
           return done(err);
         }
         connection.query(
           `SELECT date FROM visits WHERE word_id = 1`,
+          // eslint-disable-next-line consistent-return
           (error, visits) => {
             if (error) {
               return done(err);
