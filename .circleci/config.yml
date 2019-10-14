@@ -2,12 +2,17 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.6.0
+        # environment:
+        #   MYSQL_ROOT_PASSWORD: root
+        #   MYSQL_DATABASE: urbandiction
+        #   MYSQL_USER: student
+        #   MYSQL_PASSWORD: student
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,6 +23,49 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install things we need
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y libzip-dev
+            sudo apt-get install -y zlib1g-dev libicu-dev g++
+            sudo apt-get install mysql-client
+            sudo apt-get -y install mysql-server
+      # - run:
+      #     name: Fix MySQL socket config
+      #     command: |
+      #       sudo sh -c "echo 'pdo_mysql.default_socket=/var/run/mysqld/mysqld.sock' > /usr/local/etc/php/conf.d/pdo.ini"
+      - run:
+          name: Start database server
+          command: |
+            sudo service mysql start
+            sleep 2
+            ps aux | grep mysql
+      - run:
+          # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Create non-admin user
+          command: |
+            # sudo mysql -u root -e "CREATE user student IDENTIFIED BY 'student';"
+            sudo mysql -u root -e "USE mysql;UPDATE user SET plugin='mysql_native_password' WHERE User='root';FLUSH PRIVILEGES;"
+            sudo service mysql restart
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo mysql -u root -e "create database urbandiction"
+            # sudo mysql -h 127.0.0.1 -u student -pstudent urbandiction < seed_data.sql
+            sudo mysql -h 127.0.0.1 -u root urbandiction < ./server/db/seed_data.sql
+            # sudo mysql -u root < seed_data.sql
 
       # Download and cache dependencies
       - restore_cache:
@@ -32,7 +80,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
+      # start the server in the background
+      - run:
+          command: node ./server/server.js
+          background: true
       # run tests!
       - run: npm test
       - run: npx eslint "**/*.js" --ignore-pattern node_modules/
