@@ -5,6 +5,7 @@ const queryIncrementDownvoteDefinition = ({ definitionId }, callback) => {
     `UPDATE definitions SET downvotes = downvotes + 1 WHERE id = ${connection.escape(
       definitionId
     )}`,
+    // eslint-disable-next-line consistent-return
     error1 => {
       if (error1) {
         return callback(error1, null);

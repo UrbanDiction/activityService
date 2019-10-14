@@ -3,6 +3,7 @@ const connection = require("../db/connection.js");
 const queryIncrementVisitsToWord = ({ word }, callback) => {
   connection.query(
     `SELECT id FROM words where word = ${connection.escape(word)}`,
+    // eslint-disable-next-line consistent-return
     (error, wordQuery) => {
       if (error) {
         return callback(error, null);
