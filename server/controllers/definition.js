@@ -4,6 +4,10 @@ const {
   queryIncrementDownvoteDefinition
 } = require("../models/queryIncrementDownvoteDefinition.js");
 
+const {
+  queryIncrementUpvoteDefinition
+} = require("../models/queryIncrementUpvoteDefinition.js");
+
 module.exports = {
   postWordData(req, res) {
     queryWordData(req.body, (error, wordData) => {
@@ -19,6 +23,14 @@ module.exports = {
         res.status(500).send(error);
       }
       res.json({ downvoteData });
+    });
+  },
+  putIncrementUpvoteDefinition(req, res) {
+    queryIncrementUpvoteDefinition(req.body, (error, upvoteData) => {
+      if (error) {
+        res.status(500).send(error);
+      }
+      res.json({ upvoteData });
     });
   }
 };

@@ -108,6 +108,27 @@ describe("Server tests", () => {
       });
   });
 
+  it("should increment upvotes when put to /definition/upvote", done => {
+    request
+      .put("/definition/upvote")
+      .send({ definitionId: 1 })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect({
+        upvoteData: [
+          {
+            upvotes: 2
+          }
+        ]
+      })
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        return done();
+      });
+  });
+
   it("should respond with visits data to word when get to /activity/word", done => {
     request
       .get("/activity/word")
