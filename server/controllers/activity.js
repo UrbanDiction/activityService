@@ -1,15 +1,15 @@
-const { queryWordData } = require("../models/queryWordData.js");
+const { queryGetVisitsForWord } = require("../models/queryGetVisitsForWord.js");
 const {
   queryIncrementVisitsToWord
 } = require("../models/queryIncrementVisitsToWord.js");
 
 module.exports = {
-  postWordData(req, res) {
-    queryWordData(req.body, (error, results) => {
+  getVisitsForWord(req, res) {
+    queryGetVisitsForWord(req.body, (error, visits) => {
       if (error) {
         res.status(500).send(error);
       }
-      res.json(results);
+      res.json(visits);
     });
   },
   postIncrementVisitsToWord(req, res) {

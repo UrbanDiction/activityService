@@ -53,9 +53,9 @@ describe("Server tests", () => {
   //   connection.end();
   // });
 
-  it("should respond to a get request to /activity/word", done => {
+  it("should respond to a get request to /definition/word with all data", done => {
     request
-      .get("/activity/word")
+      .get("/definition/word")
       .send({ word: "test" })
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
@@ -87,7 +87,22 @@ describe("Server tests", () => {
       });
   });
 
-  it("should add a visit when post to /activity/view", done => {
+  it("should respond with visits data to word when get to /activity/word", done => {
+    request
+      .get("/activity/word")
+      .send({ word: "test" })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect({ visitsQuery: [{ id: 1, date: "test date", word_id: 1 }] })
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        return done();
+      });
+  });
+
+  it("should add a visit to a word when post to /activity/word", done => {
     request
       .post("/activity/word")
       .send({ word: "test" })
