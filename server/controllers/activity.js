@@ -7,7 +7,7 @@ module.exports = {
   getVisitsForWord(req, res) {
     queryGetVisitsForWord(req.body, (error, visits) => {
       if (error) {
-        res.status(500).send(error);
+        res.status(500).json({ error });
       } else {
         res.json(visits);
       }
@@ -16,7 +16,7 @@ module.exports = {
   postIncrementVisitsToWord(req, res) {
     queryIncrementVisitsToWord(req.body, error => {
       if (error) {
-        res.status(500).send(error);
+        res.status(500).json({ error });
       } else {
         res.end();
       }

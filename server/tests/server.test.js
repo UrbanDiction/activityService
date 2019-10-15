@@ -55,7 +55,7 @@ describe("Server tests", () => {
 
   it("should respond to a get request to /definition/word with all data", done => {
     request
-      .get("/definition/word")
+      .post("/definition/word")
       .send({ word: "test" })
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
@@ -94,7 +94,7 @@ describe("Server tests", () => {
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect({
-        downvoteData: [
+        downvoteQuery: [
           {
             downvotes: 2
           }
@@ -115,7 +115,7 @@ describe("Server tests", () => {
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect({
-        upvoteData: [
+        upvoteQuery: [
           {
             upvotes: 2
           }
@@ -131,7 +131,7 @@ describe("Server tests", () => {
 
   it("should respond with visits data to word when get to /activity/word", done => {
     request
-      .get("/activity/word")
+      .post("/activity/word/getVisits")
       .send({ word: "test" })
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
@@ -146,7 +146,7 @@ describe("Server tests", () => {
 
   it("should add a visit to a word when post to /activity/word", done => {
     request
-      .post("/activity/word")
+      .post("/activity/word/incrementVisit")
       .send({ word: "test" })
       // eslint-disable-next-line consistent-return
       .end(err => {

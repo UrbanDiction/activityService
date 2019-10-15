@@ -15,7 +15,7 @@ const queryIncrementVisitsToWord = ({ word }, callback) => {
           if (error2) {
             return callback(error2, null);
           }
-          return callback(null, visit);
+          return callback(null, { visit });
         }
       );
     }
