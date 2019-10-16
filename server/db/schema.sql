@@ -33,6 +33,8 @@ CREATE TABLE visits (
 CREATE TABLE definitions (
   id int NOT NULL AUTO_INCREMENT,
   definition varchar(500),
+  example varchar(500),
+  hash_tags varchar(500),
   created_date varchar(150),
   created_by varchar(30),
   upvotes int,
