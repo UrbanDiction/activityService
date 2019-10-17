@@ -1,6 +1,12 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-undef */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-unused-vars */
+
 import React from "react";
 
-// eslint-disable-next-line no-unused-vars
 import ActivityChart from "./components/activity/ActivityChart.jsx";
 
 const fetch = require("node-fetch");
@@ -13,11 +19,10 @@ class App extends React.Component {
     };
   }
 
-  // eslint-disable-next-line class-methods-use-this
   componentDidMount() {
     fetch("/activity/word/getVisits", {
       method: "POST",
-      body: JSON.stringify({ word: "test" }),
+      body: JSON.stringify({ word: "qui" }),
       headers: {
         "Content-Type": "application/json"
       }
@@ -26,11 +31,31 @@ class App extends React.Component {
         return data.json();
       })
       .then(({ visitsQuery }) => {
-        const visits = [[], []];
+        function dedupe(arr) {
+          const output = {};
+          for (let i = 0; i < arr.length; i += 1) {
+            if (output[arr[i]]) {
+              output[arr[i]]++;
+            } else {
+              output[arr[i]] = 1;
+            }
+          }
+          return output;
+        }
+
+        const dateArr = [];
 
         for (let i = 0; i < visitsQuery.length; i += 1) {
-          visits[0].push(visitsQuery[i].date);
-          visits[1].push(1);
+          dateArr.push(visitsQuery[i].date);
+        }
+
+        const dedupedVisits = dedupe(dateArr);
+
+        const visits = [[], []];
+
+        for (const key in dedupedVisits) {
+          visits[0].push(key);
+          visits[1].push(dedupedVisits[key]);
         }
         visits[0].unshift("x");
         visits[1].unshift("Activity");
@@ -40,11 +65,9 @@ class App extends React.Component {
       });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   populateC3Grid() {
     const chart = document.getElementById("chart");
     if (chart) {
-      // eslint-disable-next-line no-unused-vars
       const months = [
         "January",
         "February",
@@ -59,7 +82,6 @@ class App extends React.Component {
         "November",
         "December"
       ];
-      // eslint-disable-next-line no-undef
       c3.generate({
         size: {
           height: 200
@@ -74,7 +96,6 @@ class App extends React.Component {
           type: "bar"
         },
         tooltip: {
-          // eslint-disable-next-line no-unused-vars
           contents(data, defaultTitleFormat, defaultValueFormat, color) {
             return `<table class="c3-tooltip"><tr><td>${
               months[data[0].x.getMonth()]
@@ -110,7 +131,6 @@ class App extends React.Component {
     }
   }
 
-  // eslint-disable-next-line
   render() {
     return (
       <div>

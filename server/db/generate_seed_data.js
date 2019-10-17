@@ -19,7 +19,7 @@ for (let i = 0; i < 100; i += 1) {
   connection.query(
     `INSERT INTO words (word) VALUES ('${loremWord}')`,
     (err, res) => {
-      const defNum = Math.floor(Math.random() * 10);
+      const defNum = Math.ceil(Math.random() * 15);
       for (let z = 0; z < defNum; z += 1) {
         const wordId = res.insertId;
         const pastDate = faker.date.recent(365).toISOString();
@@ -40,7 +40,7 @@ for (let i = 0; i < 100; i += 1) {
         const hashTags = faker.fake(
           "{{lorem.word}} {{lorem.word}} {{lorem.word}}"
         );
-        const visitsNum = Math.floor(Math.random() * 50);
+        const visitsNum = Math.ceil(Math.random() * 500 + 50);
         connection.query(
           `INSERT INTO definitions (definition, example, hash_tags, created_date, created_by, upVotes, downVotes, word_id) VALUES ('${definition}', '${example}', '${hashTags}', '${slicedDate}', '${name}', ${upVotes}, ${downVotes}, ${wordId})`,
           () => {
