@@ -18,7 +18,7 @@ const queryIncrementDownvoteDefinition = ({ definitionId }, callback) => {
           if (error2) {
             return callback(error2, null);
           }
-          return callback(null, downvoteQuery);
+          return callback(null, { downvoteQuery });
         }
       );
     }
