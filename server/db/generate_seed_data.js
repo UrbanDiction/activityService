@@ -19,7 +19,7 @@ for (let i = 0; i < 100; i += 1) {
   connection.query(
     `INSERT INTO words (word) VALUES ('${loremWord}')`,
     (err, res) => {
-      const defNum = Math.ceil(Math.random() * 15);
+      const defNum = Math.ceil(Math.random() * 8);
       for (let z = 0; z < defNum; z += 1) {
         const wordId = res.insertId;
         const pastDate = faker.date.recent(365).toISOString();
@@ -40,14 +40,15 @@ for (let i = 0; i < 100; i += 1) {
         const hashTags = faker.fake(
           "{{lorem.word}} {{lorem.word}} {{lorem.word}}"
         );
-        const visitsNum = Math.ceil(Math.random() * 500 + 50);
+        const visitsNum = Math.ceil(Math.random() * 200 + 50);
         connection.query(
           `INSERT INTO definitions (definition, example, hash_tags, created_date, created_by, upVotes, downVotes, word_id) VALUES ('${definition}', '${example}', '${hashTags}', '${slicedDate}', '${name}', ${upVotes}, ${downVotes}, ${wordId})`,
           () => {
             for (let x = 0; x < visitsNum; x += 1) {
-              const pastDate2 = faker.date.recent(365).toISOString();
+              const pastDate2 = faker.date.recent(2550).toISOString();
               const cut2 = pastDate2.indexOf("T");
-              const slicedDate2 = pastDate2.slice(0, cut2);
+              let slicedDate2 = pastDate2.slice(0, cut2 - 2);
+              slicedDate2 += "01";
               connection.query(
                 `INSERT INTO visits (date, word_id) VALUES ('${slicedDate2}', ${wordId})`,
                 () => {

@@ -22,7 +22,7 @@ class App extends React.Component {
   componentDidMount() {
     fetch("/activity/word/getVisits", {
       method: "POST",
-      body: JSON.stringify({ word: "qui" }),
+      body: JSON.stringify({ word: "sint" }),
       headers: {
         "Content-Type": "application/json"
       }
