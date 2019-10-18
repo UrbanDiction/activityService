@@ -1,4 +1,4 @@
-const request = require("supertest")("http://localhost:8000");
+const request = require("supertest")("http://localhost:8002");
 const connection = require("../db/connection.js");
 
 describe("Server tests", () => {

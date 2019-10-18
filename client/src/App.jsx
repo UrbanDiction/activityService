@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8000/activity/word/getVisits", {
+    fetch("http://localhost:8002/activity/word/getVisits", {
       method: "POST",
       body: JSON.stringify({ word: "test" }),
       headers: {
