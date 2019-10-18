@@ -49,9 +49,21 @@ describe("Server tests", () => {
     );
   });
 
-  // afterEach(() => {
-  //   connection.end();
-  // });
+  it("should send an error when word not found", done => {
+    request
+      .post("/definition/word")
+      .send({ word: "not gonna be found" })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect({ error: "Word not found!" })
+      .expect(500)
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        return done();
+      });
+  });
 
   it("should respond to a post request to /definition/word with all data", done => {
     request
@@ -80,12 +92,11 @@ describe("Server tests", () => {
         ]
       })
       .expect(200)
-      // eslint-disable-next-line consistent-return
       .end(err => {
         if (err) {
           return done(err);
         }
-        done();
+        return done();
       });
   });
 
@@ -157,13 +168,12 @@ describe("Server tests", () => {
         }
         connection.query(
           `SELECT date FROM visits WHERE word_id = 1`,
-          // eslint-disable-next-line consistent-return
           (error, visits) => {
             if (error) {
               return done(err);
             }
             expect(visits.length).toEqual(2);
-            done();
+            return done();
           }
         );
       });
