@@ -70,7 +70,6 @@ class App extends React.Component {
   populateC3Grid() {
     const chart = document.getElementById("chart");
     if (chart) {
-      console.log("GOT HERE");
       const months = [
         "January",
         "February",
