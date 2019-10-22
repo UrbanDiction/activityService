@@ -9,8 +9,6 @@ import React from "react";
 
 import ActivityChart from "./components/activity/ActivityChart.jsx";
 
-const fetch = require("node-fetch");
-
 class App extends React.Component {
   constructor() {
     super();

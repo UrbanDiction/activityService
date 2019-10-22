@@ -26,9 +26,7 @@ for (let i = 0; i < 100; i += 1) {
         const cut = pastDate.indexOf("T");
         const slicedDate = pastDate.slice(0, cut);
         const upVotes = faker.random.number({ min: 0, max: 15000 });
-        const downVotes = faker.random.number({
-          options: { min: 0, max: 7500 }
-        });
+        const downVotes = faker.random.number({ min: 0, max: 12500 });
         const name = faker.name.findName();
         const definition = faker.fake(
           "{{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}} {{lorem.word}}"
