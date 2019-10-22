@@ -4,7 +4,6 @@ import React from "react";
 // eslint-disable-next-line
 import { shallow, mount } from "enzyme";
 import App from "../src/App.jsx";
-import ActivityChart from "../src/components/activity/ActivityChart.jsx";
 
 global.fetch = () => {
   return new Promise(resolve => {
@@ -33,15 +32,11 @@ global.fetch = () => {
 
 describe("First React component test with Enzyme", () => {
   it("renders the chart without crashing", () => {
-    expect(
-      mount(<App />)
-        .find("ActivityChart")
-        .find(".monthly-activity").length
-    ).toEqual(1);
+    expect(mount(<App />).find(".monthly-activity").length).toEqual(1);
   });
 
   it("fetches data from server when server returns a successful response", done => {
-    document.body.innerHTML = `<div className="monthly - activity c3" id="chart"></div>`;
+    document.body.innerHTML = `<div className="monthly-activity c3" id="chart"></div>`;
 
     const app = shallow(<App />);
 
