@@ -9,8 +9,6 @@ import React from "react";
 
 import ActivityChart from "./components/activity/ActivityChart.jsx";
 
-const fetch = require("node-fetch");
-
 class App extends React.Component {
   constructor() {
     super();
@@ -72,6 +70,7 @@ class App extends React.Component {
   populateC3Grid() {
     const chart = document.getElementById("chart");
     if (chart) {
+      console.log("GOT HERE");
       const months = [
         "January",
         "February",

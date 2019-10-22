@@ -18,6 +18,11 @@
 --
 -- Table structure for table `definitions`
 --
+DROP DATABASE IF EXISTS urbandiction;
+
+CREATE DATABASE urbandiction;
+
+USE urbandiction;
 
 DROP TABLE IF EXISTS `definitions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
