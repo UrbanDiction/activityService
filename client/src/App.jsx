@@ -1,13 +1,11 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
-
 import React from "react";
-
-import ActivityChart from "./components/activity/ActivityChart.jsx";
 
 class App extends React.Component {
   constructor() {
@@ -15,6 +13,8 @@ class App extends React.Component {
     this.state = {
       activity: null
     };
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.render = this.render.bind(this);
   }
 
   componentDidMount() {
@@ -134,11 +134,7 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <ActivityChart />
-      </div>
-    );
+    return <div className="monthly-activity c3" id="chart"></div>;
   }
 }
 
