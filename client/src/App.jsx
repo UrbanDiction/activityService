@@ -20,12 +20,12 @@ class App extends React.Component {
   componentDidMount() {
     fetch("http://localhost:8002/activity/word/getVisits", {
       method: "POST",
-      body: JSON.stringify({ word: "test" }),
+      body: JSON.stringify({ word: "repellat" }),
       headers: {
         "Content-Type": "application/json"
       }
     })
-      .then(data => {
+      .then((data) => {
         return data.json();
       })
       .then(({ visitsQuery }) => {
@@ -61,7 +61,7 @@ class App extends React.Component {
         this.setState({ activity: visits });
         this.populateC3Grid();
       })
-      .catch(err => {
+      .catch((err) => {
         // Disabled for testing...
         // console.log(err);
       });
