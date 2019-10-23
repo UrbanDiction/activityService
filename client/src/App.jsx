@@ -18,9 +18,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8002/activity/word/getVisits", {
+    const word = window.location.toString().slice(22, window.location.length);
+    fetch(`http://localhost:8002/activity/word/getVisits`, {
       method: "POST",
-      body: JSON.stringify({ word: "repellat" }),
+      body: JSON.stringify({ word }),
       headers: {
         "Content-Type": "application/json"
       }
