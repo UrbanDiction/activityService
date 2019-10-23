@@ -8,64 +8,15 @@
 import React from "react";
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      activity: null
+      activity: this.props.data
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.render = this.render.bind(this);
   }
 
   componentDidMount() {
-    const word = window.location.toString().slice(22, window.location.length);
-    fetch(`http://localhost:8002/activity/word/getVisits`, {
-      method: "POST",
-      body: JSON.stringify({ word }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then((data) => {
-        return data.json();
-      })
-      .then(({ visitsQuery }) => {
-        function dedupe(arr) {
-          const output = {};
-          for (let i = 0; i < arr.length; i += 1) {
-            if (output[arr[i]]) {
-              output[arr[i]]++;
-            } else {
-              output[arr[i]] = 1;
-            }
-          }
-          return output;
-        }
-
-        const dateArr = [];
-
-        for (let i = 0; i < visitsQuery.length; i += 1) {
-          dateArr.push(visitsQuery[i].date);
-        }
-
-        const dedupedVisits = dedupe(dateArr);
-
-        const visits = [[], []];
-
-        for (const key in dedupedVisits) {
-          visits[0].push(key);
-          visits[1].push(dedupedVisits[key]);
-        }
-        visits[0].unshift("x");
-        visits[1].unshift("Activity");
-
-        this.setState({ activity: visits });
-        this.populateC3Grid();
-      })
-      .catch((err) => {
-        // Disabled for testing...
-        // console.log(err);
-      });
+    this.populateC3Grid();
   }
 
   populateC3Grid() {

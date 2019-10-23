@@ -1,6 +1,6 @@
 const connection = require("../db/connection.js");
 
-const queryGetVisitsForWord = ({ word }, callback) => {
+const queryGetVisitsForWord = (word, callback) => {
   connection.query(
     `SELECT id FROM words where word = ${connection.escape(word)}`,
     // eslint-disable-next-line consistent-return
