@@ -11,12 +11,18 @@ const js = {
   use: {
     loader: "babel-loader",
     options: {
-      presets: ["react", "es2015"],
+      presets: ["@babel/preset-react"],
       plugins: ["transform-class-properties"]
     }
   }
 };
-
+const jsx = {
+  test: /\.jsx?/,
+  loader: "babel-loader",
+  options: {
+    presets: ["@babel/preset-env", "@babel/preset-react"]
+  }
+};
 const serverConfig = {
   mode: "development",
   node: {
@@ -27,7 +33,7 @@ const serverConfig = {
     "index.js": path.resolve(__dirname, "server/server.js")
   },
   module: {
-    rules: [js]
+    rules: [js, jsx]
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -60,4 +66,4 @@ const clientConfig = {
   }
 };
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [serverConfig];

@@ -1,7 +1,4 @@
 const { queryGetVisitsForWord } = require("../models/queryGetVisitsForWord.js");
-const {
-  queryIncrementVisitsToWord
-} = require("../models/queryIncrementVisitsToWord.js");
 
 module.exports = {
   getVisitsForWord(req, res) {
@@ -10,15 +7,6 @@ module.exports = {
         res.status(500).json({ error });
       } else {
         res.json(visits);
-      }
-    });
-  },
-  postIncrementVisitsToWord(req, res) {
-    queryIncrementVisitsToWord(req.body, error => {
-      if (error) {
-        res.status(500).json({ error });
-      } else {
-        res.end();
       }
     });
   }
