@@ -59,7 +59,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       # start the server in the background
       - run:
-          command: node ./server/server.js
+          command: node ./dist/index.js
           background: true
       # run tests!
       - run: npm test
