@@ -10,3 +10,5 @@ package.json
 /dist
 /dist/index.js
 dist
+**/generateChart.js
+generateChart.js
