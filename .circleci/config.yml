@@ -63,4 +63,4 @@ jobs:
           background: true
       # run tests!
       - run: npm test
-      - run: npx eslint "**/*.js" --ignore-pattern node_modules/ --ignore-path dist/
+      - run: npx eslint "**/*.js" --ignore-pattern node_modules/
