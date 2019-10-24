@@ -1,4 +1,5 @@
-// const request = require("supertest")("http://localhost:8002");
+/* eslint-disable consistent-return */
+const request = require("supertest")("http://localhost:8002");
 const connection = require("../db/connection.js");
 
 describe("Server tests", () => {
@@ -47,5 +48,22 @@ describe("Server tests", () => {
         );
       }
     );
+  });
+
+  it("should send a react string back", done => {
+    request
+      .get("/test")
+      .set("Accept", "text/html")
+      .expect("Content-Type", "text/html; charset=utf-8")
+      .expect(
+        `<div class="monthly-activity c3" id="chart" data-monthly-activity="[[&quot;x&quot;,&quot;2012-07-01&quot;],[&quot;Activity&quot;,1]]" data-reactroot=""></div>`
+      )
+      .expect(200)
+      .end(err => {
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
   });
 });
