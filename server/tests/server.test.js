@@ -1,4 +1,4 @@
-const request = require("supertest")("http://localhost:8002");
+// const request = require("supertest")("http://localhost:8002");
 const connection = require("../db/connection.js");
 
 describe("Server tests", () => {
@@ -47,36 +47,5 @@ describe("Server tests", () => {
         );
       }
     );
-  });
-
-  it("should send an error when word not found", done => {
-    request
-      .post("/activity/word/getVisits")
-      .send({ word: "not gonna be found" })
-      .set("Accept", "application/json")
-      .expect("Content-Type", /json/)
-      .expect({ error: "Word not found!" })
-      .expect(500)
-      .end(err => {
-        if (err) {
-          return done(err);
-        }
-        return done();
-      });
-  });
-
-  it("should respond with visits data to word when post to /activity/word/getVisits", done => {
-    request
-      .post("/activity/word/getVisits")
-      .send({ word: "test" })
-      .set("Accept", "application/json")
-      .expect("Content-Type", /json/)
-      .expect({ visitsQuery: [{ id: 1, date: "2012-07-01", word_id: 1 }] })
-      .end(err => {
-        if (err) {
-          return done(err);
-        }
-        return done();
-      });
   });
 });
