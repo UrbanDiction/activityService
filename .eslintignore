@@ -6,3 +6,9 @@
 **/bundle.js
 bundle.js
 package.json
+**/dist
+/dist
+/dist/index.js
+dist
+**/generateChart.js
+generateChart.js
