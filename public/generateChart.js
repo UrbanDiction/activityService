@@ -22,7 +22,9 @@ c3.generate({
   },
   data: {
     x: "x",
-    columns: JSON.parse(chart.getAttribute("data-monthly-activity")),
+    columns: JSON.parse(
+      document.getElementById("chart").getAttribute("data-monthly-activity")
+    ),
     type: "bar"
   },
   tooltip: {

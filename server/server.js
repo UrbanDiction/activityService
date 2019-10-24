@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/:word", (req, res) => {
-  queryGetVisitsForWord(req.params.word, (error, { visitsQuery }) => {
+  queryGetVisitsForWord(req.params.word, (error, visitsQuery) => {
     if (error) {
       res.status(500).json({ error });
     } else {
