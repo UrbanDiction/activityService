@@ -53,6 +53,7 @@ describe("Server tests", () => {
   it("should send a react string back", done => {
     request
       .get("/test")
+      .send()
       .set("Accept", "text/html")
       .expect("Content-Type", "text/html; charset=utf-8")
       .expect(
