@@ -3,7 +3,7 @@ FROM node:10.16.3
 RUN mkdir /app
 
 RUN apt-get update
-RUN npm i npm@latest - g
+RUN npm i npm@latest -g
 
 COPY . /app
 WORKDIR /app
