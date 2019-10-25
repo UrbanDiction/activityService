@@ -11,10 +11,7 @@
     "webpack": "webpack -d --watch",
     "test": "jest",
     "server:dev": "nodemon ./server/server.js development",
-    "start": "node ./dist/index.js production",
-    "generate:db": "node ./server/db/generate_seed_data.js",
-    "seed:db": "mysql -u root < ./server/db/seed_data.sql",
-    "reset:db": "mysql -u root < ./server/db/schema.sql"
+    "start": "node ./dist/index.js production"
   },
   "dependencies": {
     "c3": "^0.7.11",
