@@ -9,8 +9,6 @@ const ReactDOMServer = require("react-dom/server");
 
 const express = require("express");
 
-const bodyParser = require("body-parser");
-
 const path = require("path");
 const {
   queryGetVisitsForWord
@@ -33,8 +31,6 @@ function dedupe(arr) {
 }
 
 app.use(express.static(path.join(__dirname, "/../public")));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/:word", (req, res) => {
   queryGetVisitsForWord(req.params.word, (error, visitsQuery) => {
